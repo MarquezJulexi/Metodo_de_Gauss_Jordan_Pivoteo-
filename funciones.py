@@ -5,28 +5,30 @@ def gssjrdn(a,b):
     b = np.array(b, float) ##te crea un array de tipo numpy con datos float
     n = len (b) #len retorna el numero de elementos del array
 
-    #LOOP
-    for k in range(n):
+    #ciclo
+    for k in range(n): #lleva los elementos de 0 a 1
         #Pivote parcial 0,0 1
+        #Esta función es la que realiza todo el proceso del pivote
         if np.fabs (a[k,k]) < 1.0e-12:
             for i in range (k+1,n):
                 if np.fabs(a[i,j]) > np.fabs(a[k,k]):
                     for j in range (k,n):
                         a[k,j], a[i,j],a[k,j]
-                        b[k], b[i]=b[i], b[k]
-                        break
+                    b[k], b[i]=b[i], b[k]
+                    break
+                       
         #División Pivote
         pivot =a[k,k]
         for j in range (k,n):
             a[k,j] /= pivot
-            b[k] /= pivot
+        b[k] /= pivot
         #Eliminación
         for i in range(n):
             if i == k or a [i,k] ==  0: continue
             factor = a[i,k]
             for j in range (k,n):
                 a[i,j] -= factor * a[k,j]
-                b[i] -=factor * b[k]
+            b[i] -=factor * b[k]
     return b,a
 """
     aqui --> a=[[1,2,-1],[5,2,2],[-3,5,-1]]
@@ -36,9 +38,4 @@ def gssjrdn(a,b):
         print(X)
         print("La tranformada [a]:")
         print(A)
-"""    
-
-
-
-
-            
+"""
